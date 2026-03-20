@@ -1,0 +1,436 @@
+// ══════════════════════════════════════════
+//  Corps & Plaisirs — main.js (script partagé)
+// ══════════════════════════════════════════
+
+const MFR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const MFR2 = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const DFU = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+
+// ─── CONFIG (partagée via localStorage) ───
+let cfg = {
+  activeDays: [1,2,3,4,5,6],
+  slots: ['09:00','09:30','10:00','10:30','11:00','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00'],
+  activeSlots: ['09:00','10:00','11:00','14:00','15:00','16:00','17:00','18:00'],
+  closedDates: []
+};
+let rdvs = [];
+let avis = [];
+let bookedSlots = {};
+
+try { const s = localStorage.getItem('cp_cfg'); if(s) cfg = {...cfg, ...JSON.parse(s)}; } catch(e) {}
+try { rdvs = JSON.parse(localStorage.getItem('cp_rdvs') || '[]'); } catch(e) {}
+try { avis = JSON.parse(localStorage.getItem('cp_avis') || '[]'); } catch(e) {}
+try { bookedSlots = JSON.parse(localStorage.getItem('cp_booked') || '{}'); } catch(e) {}
+
+// ─── NAVIGATION ENTRE PAGES ───
+// Détermine la page active en lisant le nom du fichier courant
+function getCurrentPage() {
+  const path = window.location.pathname;
+  const file = path.split('/').pop().replace('.html','');
+  return file || 'index';
+}
+
+// Navigation : redirige vers la bonne page HTML
+function showPage(name) {
+  const map = {
+    'accueil':         'index.html',
+    'cadre':           'cadre.html',
+    'qui':             'qui.html',
+    'accompagnements': 'accompagnements.html',
+    'rdv':             'rendez-vous.html',
+    'contact':         'contact.html',
+    'faq':             'faq.html',
+    'avis':            'avis.html'
+  };
+  const target = map[name];
+  if (target) window.location.href = target;
+}
+
+// Marque le lien actif dans la nav
+function setActiveNav() {
+  const page = getCurrentPage();
+  const pageMap = {
+    'index':           'accueil',
+    'cadre':           'cadre',
+    'qui':             'qui',
+    'accompagnements': 'accompagnements',
+    'rendez-vous':     'rdv',
+    'contact':         'contact',
+    'faq':             'faq',
+    'avis':            'avis'
+  };
+  const current = pageMap[page] || 'accueil';
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === current);
+  });
+}
+
+// ─── MENU MOBILE ───
+function toggleMenu() { document.getElementById('mobNav').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobNav').classList.remove('open'); }
+
+// ─── AVIS ───
+function renderAvis() {
+  const grid = document.getElementById('avis-grid');
+  const empty = document.getElementById('avis-empty');
+  if (!grid) return;
+  if (!avis.length) {
+    grid.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  grid.className = 'avis-g';
+  grid.innerHTML = avis.map(a => {
+    const st = '★'.repeat(a.s) + '☆'.repeat(5 - a.s);
+    const av = (a.p || '?')[0].toUpperCase();
+    return `<div class="avis-c">
+      <div class="avis-stars">${st}</div>
+      <p class="avis-txt">"${a.t}"</p>
+      <div class="avis-auth">
+        <div class="avis-av">${av}</div>
+        <div><div class="avis-nm">${a.p} ${a.i||''}</div><div class="avis-dt">${a.d||''}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+let selStar = 0;
+function openAvis() {
+  document.getElementById('avis-modal').classList.add('open');
+  selStar = 0;
+  document.querySelectorAll('#stars span').forEach(s => s.classList.remove('lit'));
+  ['av-prenom','av-init','av-txt'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = ''; });
+}
+function closeAvis() { document.getElementById('avis-modal').classList.remove('open'); }
+
+function submitAvis() {
+  const p = document.getElementById('av-prenom').value.trim();
+  const ini = document.getElementById('av-init').value.trim();
+  const t = document.getElementById('av-txt').value.trim();
+  if (!p || !t || !selStar) { alert('Merci de renseigner votre prénom, votre témoignage et une note en étoiles.'); return; }
+  const now = new Date();
+  avis.unshift({ p, i: ini, s: selStar, t, d: `${MFR[now.getMonth()]} ${now.getFullYear()}` });
+  try { localStorage.setItem('cp_avis', JSON.stringify(avis)); } catch(e) {}
+  renderAvis();
+  closeAvis();
+}
+
+// ─── RDV ───
+let rdv = { type:'', prix:'', date:'', dateObj:null, slot:'', isEtudiant:false };
+
+function goS(n) {
+  document.querySelectorAll('.rp').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.stp').forEach((s, i) => s.classList.toggle('active', i < n));
+  document.getElementById('rp' + n).classList.add('active');
+  if (n === 2) buildCal();
+  if (n === 4) fillRecap();
+}
+
+function selType(el, t, p, isEtud) {
+  document.querySelectorAll('.co').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  rdv.type = t; rdv.prix = p; rdv.isEtudiant = isEtud;
+  document.getElementById('bn1').disabled = false;
+  document.getElementById('etud-note').classList.toggle('show', isEtud);
+}
+
+// Calendrier
+let cY = 0, cM = 0, selD = null, selSl = null;
+function buildCal() {
+  const now = new Date();
+  if (!cY) { cY = now.getFullYear(); cM = now.getMonth(); }
+  const root = document.getElementById('cal-root');
+  if (!root) return;
+  const first = new Date(cY, cM, 1);
+  const days = new Date(cY, cM + 1, 0).getDate();
+  let dow = first.getDay(); if (dow === 0) dow = 7;
+  let h = `<div class="ch">
+    <button class="cn" onclick="pm()">‹</button>
+    <span class="cm">${MFR[cM]} ${cY}</span>
+    <button class="cn" onclick="nm()">›</button>
+  </div><div class="cg">`;
+  ['Lu','Ma','Me','Je','Ve','Sa','Di'].forEach(d => h += `<div class="cdn">${d}</div>`);
+  for (let i = 1; i < dow; i++) h += `<div class="cd e"></div>`;
+  for (let d = 1; d <= days; d++) {
+    const dt = new Date(cY, cM, d);
+    const jd = dt.getDay();
+    const idx = jd === 0 ? 0 : jd;
+    const past = dt < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const ds = `${cY}-${String(cM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const closed = cfg.closedDates.includes(ds) || !cfg.activeDays.includes(idx) || jd === 0;
+    const tod = dt.toDateString() === now.toDateString();
+    const isSel = selD && dt.toDateString() === selD.toDateString();
+    const hasS = !past && !closed && cfg.activeSlots.length > 0;
+    let c = 'cd';
+    if (past || closed) c += ' p';
+    if (jd === 0) c += ' cl2';
+    if (tod) c += ' tod';
+    if (isSel) c += ' sel';
+    if (hasS && !isSel) c += ' hs';
+    h += `<div class="${c}" onclick="pickD(${cY},${cM},${d})">${d}</div>`;
+  }
+  h += '</div>';
+  root.innerHTML = h;
+}
+function pm() { cM--; if (cM < 0) { cM = 11; cY--; } buildCal(); }
+function nm() { cM++; if (cM > 11) { cM = 0; cY++; } buildCal(); }
+function pickD(y, m, d) {
+  const dt = new Date(y, m, d); const jd = dt.getDay();
+  if (jd === 0) return;
+  const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  if (cfg.closedDates.includes(ds) || !cfg.activeDays.includes(jd === 0 ? 0 : jd)) return;
+  selD = dt; selSl = null; buildCal(); buildSlots(); chkS2();
+}
+function buildSlots() {
+  const root = document.getElementById('slots-root');
+  if (!selD) { root.innerHTML = '<p class="no-slots">Sélectionnez d\'abord une date.</p>'; return; }
+  if (!cfg.activeSlots.length) { root.innerHTML = '<p class="no-slots">Aucun créneau disponible.</p>'; return; }
+  const ds = `${selD.getFullYear()}-${String(selD.getMonth()+1).padStart(2,'0')}-${String(selD.getDate()).padStart(2,'0')}`;
+  const taken = bookedSlots[ds] || [];
+  const available = [...cfg.activeSlots].sort().filter(s => !taken.includes(s));
+  if (!available.length) { root.innerHTML = '<p class="no-slots">Aucun créneau disponible pour cette date.</p>'; return; }
+  let h = '<div class="slots-w">';
+  [...cfg.activeSlots].sort().forEach(s => {
+    if (taken.includes(s)) {
+      h += `<div class="slot un" title="Déjà réservé">🔒 ${s}</div>`;
+    } else {
+      h += `<div class="slot${selSl === s ? ' sel' : ''}" onclick="pickSl(this,'${s}')">${s}</div>`;
+    }
+  });
+  h += '</div>';
+  root.innerHTML = h;
+}
+function pickSl(el, t) {
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('sel'));
+  el.classList.add('sel'); selSl = t;
+  const jd = selD.getDay();
+  rdv.date = `${DFU[jd===0?6:jd-1]} ${selD.getDate()} ${MFR2[selD.getMonth()]} ${selD.getFullYear()} à ${t}`;
+  rdv.dateObj = selD; chkS2();
+}
+function chkS2() { document.getElementById('bn2').disabled = !(selD && selSl); }
+
+function chkS3() {
+  const ok = document.getElementById('fp').value.trim() &&
+             document.getElementById('fn').value.trim() &&
+             document.getElementById('fe').value.includes('@');
+  const pjOk = !rdv.isEtudiant || document.getElementById('pj-rdv').files.length > 0;
+  document.getElementById('bn3').disabled = !(ok && pjOk);
+}
+
+function updatePjRdv() {
+  const req = document.getElementById('pj-rdv-req');
+  if (req) req.style.display = rdv.isEtudiant ? 'inline' : 'none';
+}
+
+function fillRecap() {
+  rdv.prenom = document.getElementById('fp').value;
+  rdv.nom = document.getElementById('fn').value;
+  rdv.email = document.getElementById('fe').value;
+  document.getElementById('rr-t').textContent = rdv.type;
+  document.getElementById('rr-d').textContent = rdv.date;
+  document.getElementById('rr-n').textContent = rdv.prenom + ' ' + rdv.nom;
+  document.getElementById('rr-e').textContent = rdv.email;
+  document.getElementById('rr-p').textContent = rdv.prix;
+  const pjInput = document.getElementById('pj-rdv');
+  const pjRow = document.getElementById('rr-pj-row');
+  if (pjInput.files.length > 0) {
+    pjRow.style.display = 'flex';
+    document.getElementById('rr-pj').textContent = pjInput.files[0].name;
+  } else {
+    pjRow.style.display = 'none';
+  }
+  updatePjRdv();
+}
+
+let selPM = '';
+function selPay(el, t) {
+  document.querySelectorAll('.po').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel'); selPM = t;
+  document.querySelectorAll('.pinfo').forEach(p => p.classList.remove('show'));
+  document.getElementById('pi-' + t).classList.add('show');
+  document.getElementById('bn4').disabled = false;
+}
+
+function valider() {
+  const pjName = document.getElementById('pj-rdv').files.length > 0 ? document.getElementById('pj-rdv').files[0].name : '';
+  rdvs.unshift({ prenom: rdv.prenom, nom: rdv.nom, email: rdv.email, type: rdv.type, prix: rdv.prix, date: rdv.date, mode: selPM, pj: pjName, ts: new Date().toISOString() });
+  try { localStorage.setItem('cp_rdvs', JSON.stringify(rdvs)); } catch(e) {}
+  if (rdv.dateObj && selSl) {
+    const ds = `${rdv.dateObj.getFullYear()}-${String(rdv.dateObj.getMonth()+1).padStart(2,'0')}-${String(rdv.dateObj.getDate()).padStart(2,'0')}`;
+    if (!bookedSlots[ds]) bookedSlots[ds] = [];
+    if (!bookedSlots[ds].includes(selSl)) bookedSlots[ds].push(selSl);
+    try { localStorage.setItem('cp_booked', JSON.stringify(bookedSlots)); } catch(e) {}
+  }
+  document.querySelectorAll('.rp').forEach(p => p.classList.remove('active'));
+  document.getElementById('rp-ok').classList.add('active');
+  document.getElementById('conf-nm').textContent = rdv.prenom;
+  document.querySelectorAll('.stp').forEach(s => s.classList.add('active'));
+  renderAdmRdv();
+}
+
+// ─── CONTACT ───
+function sendContact() {
+  const email = document.getElementById('cf-email').value;
+  const msg = document.getElementById('cf-msg').value;
+  if (!email.includes('@') || !msg.trim()) { alert('Merci de renseigner votre e-mail et votre message.'); return; }
+  document.getElementById('contact-ok').classList.add('show');
+  ['cf-prenom','cf-nom','cf-email','cf-sujet','cf-msg'].forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = ''; });
+  if(document.getElementById('cf-pj')) document.getElementById('cf-pj').value = '';
+  setTimeout(() => document.getElementById('contact-ok').classList.remove('show'), 5000);
+}
+
+// ─── DIPLÔME MODAL ───
+function openDiplome() { document.getElementById('diplome-modal').classList.add('open'); }
+function closeDiplome() { document.getElementById('diplome-modal').classList.remove('open'); }
+
+// ─── FAQ ───
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+}
+
+// ─── ADMIN ───
+function openAdm() { document.getElementById('adm-bg').classList.add('open'); renderAdm(); }
+function closeAdm() { document.getElementById('adm-bg').classList.remove('open'); }
+
+function renderAdm() {
+  const dt = document.getElementById('dtog'); if(!dt) return;
+  dt.innerHTML = '';
+  const dl = ['Lun','Mar','Mer','Jeu','Ven','Sam'];
+  [1,2,3,4,5,6].forEach((d, i) => {
+    const b = document.createElement('button');
+    b.className = 'dbtn' + (cfg.activeDays.includes(d) ? ' on' : '');
+    b.textContent = dl[i];
+    b.onclick = () => {
+      const idx = cfg.activeDays.indexOf(d);
+      if (idx > -1) cfg.activeDays.splice(idx, 1); else cfg.activeDays.push(d);
+      cfg.activeDays.sort(); renderAdm();
+    };
+    dt.appendChild(b);
+  });
+  const sm = document.getElementById('smgr'); sm.innerHTML = '';
+  [...cfg.slots].sort().forEach(s => {
+    const b = document.createElement('div');
+    b.className = 'stog ' + (cfg.activeSlots.includes(s) ? 'on' : 'off');
+    b.textContent = s;
+    b.onclick = () => {
+      const idx = cfg.activeSlots.indexOf(s);
+      if (idx > -1) cfg.activeSlots.splice(idx, 1); else cfg.activeSlots.push(s);
+      renderAdm();
+    };
+    sm.appendChild(b);
+  });
+  renderClosed(); renderAdmRdv(); renderBooked();
+}
+
+function addSlot() {
+  const v = document.getElementById('new-t').value;
+  if (!v) return;
+  if (!cfg.slots.includes(v)) cfg.slots.push(v);
+  if (!cfg.activeSlots.includes(v)) cfg.activeSlots.push(v);
+  document.getElementById('new-t').value = '';
+  renderAdm(); flash('sm1', '✓ Créneau ajouté');
+}
+
+function renderClosed() {
+  const l = document.getElementById('cl-list'); if(!l) return;
+  l.innerHTML = '';
+  cfg.closedDates.forEach(d => {
+    const sp = document.createElement('div');
+    sp.className = 'dbd';
+    sp.innerHTML = `${d} <button onclick="rmClosed('${d}')">×</button>`;
+    l.appendChild(sp);
+  });
+}
+function addClosed() {
+  const v = document.getElementById('cl-date').value;
+  if (!v || cfg.closedDates.includes(v)) return;
+  cfg.closedDates.push(v);
+  document.getElementById('cl-date').value = '';
+  renderClosed();
+}
+function rmClosed(d) { cfg.closedDates = cfg.closedDates.filter(x => x !== d); renderClosed(); }
+
+function renderAdmRdv() {
+  const l = document.getElementById('adm-rdv'); if(!l) return;
+  if (!rdvs.length) { l.innerHTML = '<p class="hint">Aucune demande pour le moment.</p>'; return; }
+  l.innerHTML = rdvs.map(r => `
+    <div class="rdv-it">
+      <div>
+        <div class="ri-who">${r.prenom||''} ${r.nom||''}</div>
+        <div class="ri-wh">${r.date||''} · ${r.email||''}${r.pj?' · 📎 '+r.pj:''}</div>
+      </div>
+      <span class="ri-tag">${r.type||''} · ${r.prix||''}</span>
+    </div>`).join('');
+}
+
+function renderBooked() {
+  const l = document.getElementById('adm-booked'); if(!l) return;
+  l.innerHTML = '';
+  let hasAny = false;
+  Object.keys(bookedSlots).sort().forEach(date => {
+    (bookedSlots[date] || []).forEach(slot => {
+      hasAny = true;
+      const sp = document.createElement('div');
+      sp.className = 'dbd';
+      sp.innerHTML = `📅 ${date} à ${slot} <button onclick="unblockSlot('${date}','${slot}')">×</button>`;
+      l.appendChild(sp);
+    });
+  });
+  if (!hasAny) l.innerHTML = '<p class="hint">Aucun créneau réservé.</p>';
+}
+
+function unblockSlot(date, slot) {
+  if (!bookedSlots[date]) return;
+  bookedSlots[date] = bookedSlots[date].filter(s => s !== slot);
+  if (!bookedSlots[date].length) delete bookedSlots[date];
+  try { localStorage.setItem('cp_booked', JSON.stringify(bookedSlots)); } catch(e) {}
+  renderBooked();
+}
+
+function saveAdm() {
+  try { localStorage.setItem('cp_cfg', JSON.stringify(cfg)); } catch(e) {}
+  flash('sm2', '✓ Modifications sauvegardées');
+  buildCal();
+}
+
+function flash(id, msg) {
+  const el = document.getElementById(id); if(!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 2800);
+}
+
+// ─── INIT AU CHARGEMENT ───
+document.addEventListener('DOMContentLoaded', () => {
+  setActiveNav();
+
+  // Stars avis
+  document.querySelectorAll('#stars span').forEach(s => {
+    s.addEventListener('click', () => {
+      selStar = +s.dataset.v;
+      document.querySelectorAll('#stars span').forEach((x, i) => x.classList.toggle('lit', i < selStar));
+    });
+  });
+
+  // Fermer modals au clic fond
+  const avisModal = document.getElementById('avis-modal');
+  if (avisModal) avisModal.addEventListener('click', function(e) { if(e.target===this) closeAvis(); });
+
+  const diplomeModal = document.getElementById('diplome-modal');
+  if (diplomeModal) diplomeModal.addEventListener('click', function(e) { if(e.target===this) closeDiplome(); });
+
+  const admBg = document.getElementById('adm-bg');
+  if (admBg) admBg.addEventListener('click', function(e) { if(e.target===this) closeAdm(); });
+
+  // Rendu conditionnel selon la page
+  const page = getCurrentPage();
+  if (page === 'rendez-vous') buildCal();
+  if (page === 'avis') renderAvis();
+});

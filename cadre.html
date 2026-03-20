@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rendez-vous — Corps & Plaisirs · Onyn Cossé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo-img" src="assets/logo.png" alt="Corps & Plaisirs"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <svg style="display:none;height:52px;width:auto" viewBox="0 0 200 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="0" y="28" font-family="Cormorant Garamond,serif" font-size="20" font-weight="500" fill="#3d2314">CORPS &amp;</text>
+      <text x="0" y="50" font-family="Cormorant Garamond,serif" font-size="20" font-weight="500" fill="#3d2314">PLAISIRS</text>
+    </svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-page="accueil">Accueil</a></li>
+    <li><a href="cadre.html" data-page="cadre">Le cadre</a></li>
+    <li><a href="qui.html" data-page="qui">Qui suis-je ?</a></li>
+    <li><a href="accompagnements.html" data-page="accompagnements">Accompagnements</a></li>
+    <li><a href="rendez-vous.html" data-page="rdv" class="active">Rendez-vous</a></li>
+    <li><a href="contact.html" data-page="contact">Contact</a></li>
+    <li><a href="faq.html" data-page="faq">FAQ</a></li>
+    <li><a href="avis.html" data-page="avis">Avis</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <a href="index.html" onclick="closeMenu()">Accueil</a>
+  <a href="cadre.html" onclick="closeMenu()">Le cadre</a>
+  <a href="qui.html" onclick="closeMenu()">Qui suis-je ?</a>
+  <a href="accompagnements.html" onclick="closeMenu()">Accompagnements</a>
+  <a href="rendez-vous.html" onclick="closeMenu()">Rendez-vous</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+  <a href="faq.html" onclick="closeMenu()">FAQ</a>
+  <a href="avis.html" onclick="closeMenu()">Avis</a>
+</div>
+
+<!-- ══ PAGE RENDEZ-VOUS ══ -->
+<div id="pg-rdv" class="page active sec" style="background:linear-gradient(160deg,var(--creme) 0%,var(--blanc) 100%)">
+  <div class="sh">
+    <div class="stag">Prise de rendez-vous</div>
+    <h2 class="stitle">Réserver une <em>séance</em></h2>
+    <div class="sdiv"></div>
+  </div>
+
+  <!-- Stepper -->
+  <div class="steps">
+    <div class="stp active" data-n="1"><span>1</span><p>Type</p></div>
+    <div class="stp" data-n="2"><span>2</span><p>Date</p></div>
+    <div class="stp" data-n="3"><span>3</span><p>Infos</p></div>
+    <div class="stp" data-n="4"><span>4</span><p>Récap</p></div>
+  </div>
+
+  <!-- Étape 1 — type de consultation -->
+  <div class="rp active" id="rp1">
+    <h3 class="rh">Choisissez votre consultation</h3>
+    <div class="cos">
+      <div class="co" onclick="selType(this,'Individuelle','55 €',false)">
+        <div class="co-ic">🌿</div><div class="co-t">Individuelle</div><div class="co-p">55 €</div>
+      </div>
+      <div class="co" onclick="selType(this,'Couple','90 €',false)">
+        <div class="co-ic">💞</div><div class="co-t">Couple</div><div class="co-p">90 €</div>
+      </div>
+      <div class="co" onclick="selType(this,'Étudiant·e','45 €',true)">
+        <div class="co-ic">🎓</div><div class="co-t">Étudiant·e</div><div class="co-p">45 €</div>
+      </div>
+    </div>
+    <div class="etud-note" id="etud-note">
+      🎓 Tarif étudiant·e sur justificatif valide. Vous pourrez joindre votre carte étudiante à l'étape suivante.
+    </div>
+    <div class="rnav"><span></span><button class="bn" id="bn1" onclick="goS(2)" disabled>Suivant →</button></div>
+  </div>
+
+  <!-- Étape 2 — date et créneau -->
+  <div class="rp" id="rp2">
+    <h3 class="rh">Choisissez une date et un créneau</h3>
+    <div class="cal-grid">
+      <div class="cal-box"><h4>📅 Calendrier</h4><div id="cal-root"></div></div>
+      <div class="cal-box"><h4>🕐 Créneaux disponibles</h4><div id="slots-root"><p class="no-slots">Sélectionnez d'abord une date.</p></div></div>
+    </div>
+    <div class="rnav">
+      <button class="bp" onclick="goS(1)">← Retour</button>
+      <button class="bn" id="bn2" onclick="goS(3)" disabled>Suivant →</button>
+    </div>
+  </div>
+
+  <!-- Étape 3 — coordonnées -->
+  <div class="rp" id="rp3">
+    <h3 class="rh">Vos coordonnées</h3>
+    <div class="fgrid">
+      <div class="fg"><label>Prénom *</label><input type="text" id="fp" oninput="chkS3()" placeholder="Votre prénom"></div>
+      <div class="fg"><label>Nom *</label><input type="text" id="fn" oninput="chkS3()" placeholder="Votre nom"></div>
+      <div class="fg full"><label>E-mail *</label><input type="email" id="fe" oninput="chkS3()" placeholder="votre@email.com"></div>
+      <div class="fg full" id="pj-rdv-wrap">
+        <label id="pj-rdv-label">Pièce jointe <span id="pj-rdv-req" style="display:none;color:var(--marron)">* (obligatoire — justificatif étudiant)</span></label>
+        <input type="file" id="pj-rdv" accept=".pdf,.jpg,.jpeg,.png" onchange="chkS3()">
+      </div>
+    </div>
+    <div class="rnav">
+      <button class="bp" onclick="goS(2)">← Retour</button>
+      <button class="bn" id="bn3" onclick="goS(4)" disabled>Confirmer →</button>
+    </div>
+  </div>
+
+  <!-- Étape 4 — récapitulatif et paiement -->
+  <div class="rp" id="rp4">
+    <h3 class="rh">Récapitulatif &amp; paiement</h3>
+    <div class="recap-box">
+      <div class="rr"><span class="rl">Type</span><span class="rv" id="rr-t">—</span></div>
+      <div class="rr"><span class="rl">Date</span><span class="rv" id="rr-d">—</span></div>
+      <div class="rr"><span class="rl">Nom</span><span class="rv" id="rr-n">—</span></div>
+      <div class="rr"><span class="rl">E-mail</span><span class="rv" id="rr-e">—</span></div>
+      <div class="rr"><span class="rl">Montant</span><span class="rv" id="rr-p">—</span></div>
+      <div class="rr" id="rr-pj-row" style="display:none"><span class="rl">Pièce jointe</span><span class="rv" id="rr-pj">—</span></div>
+    </div>
+
+    <h4 style="margin:24px 0 12px;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--marron)">Mode de paiement</h4>
+    <div class="pay-opts">
+      <div class="po" onclick="selPay(this,'cb')">
+        <div class="po-ic">💳</div><div class="po-t">Virement bancaire</div>
+      </div>
+      <div class="po" onclick="selPay(this,'paypal')">
+        <div class="po-ic">🔵</div><div class="po-t">PayPal</div>
+      </div>
+    </div>
+
+    <div class="pinfo" id="pi-cb">
+      <h4>Virement bancaire</h4>
+      <p><strong>IBAN :</strong> FR76 XXXX XXXX XXXX XXXX XXXX XXX</p>
+      <p><strong>BIC :</strong> XXXXXXXX</p>
+      <p style="margin-top:10px">Dans l'objet : <em>Nom + date du RDV</em> (ex : DUPONT 25-03-2026)</p>
+      <div class="dpill">⚠️ Le règlement doit être effectué <strong> 72h avant la séance</strong>. Le lien de confirmation vous sera transmis par e-mail.</div>
+    </div>
+    <div class="pinfo" id="pi-paypal">
+      <h4>PayPal</h4>
+      <p>Envoyez votre paiement à : <strong><a href="mailto:contact@corpsetplaisirs.fr">contact@corpsetplaisirs.fr</a></strong></p>
+      <p>Indiquez en commentaire : <em>Nom + date du RDV</em> (ex : DUPONT 25-03-2026)</p>
+      <div class="dpill">⚠️ Le règlement doit être effectué <strong> 72h avant la séance</strong>.</div>
+    </div>
+
+    <div class="rnav">
+      <button class="bp" onclick="goS(3)">← Retour</button>
+      <button class="bn" id="bn4" onclick="valider()" disabled>Valider ma demande ✓</button>
+    </div>
+  </div>
+
+  <!-- Étape confirmée -->
+  <div class="rp" id="rp-ok">
+    <div class="ok-box">
+      <div class="ok-ic">✅</div>
+      <h3>Demande envoyée !</h3>
+      <p>Merci <span id="conf-nm"></span>. Votre demande de rendez-vous a bien été reçue.</p>
+      <p>Vous recevrez un e-mail de confirmation sous 24h.</p>
+      <p style="margin-top:13px;color:var(--marron)">N'oubliez pas d'effectuer votre règlement 72h avant la séance.</p>
+      <a href="index.html" class="tbtn" style="margin-top:20px;display:inline-block">← Retour à l'accueil</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer id="site-footer">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:1.02rem;color:var(--sable);margin-bottom:8px">Corps &amp; Plaisirs — Onyn Cossé, Sexo-thérapeute</p>
+  <p><a href="mailto:contact@corpsetplaisirs.fr">contact@corpsetplaisirs.fr</a> &nbsp;·&nbsp; <a href="tel:+33769008729">+33 7 69 00 87 29</a></p>
+  <p style="margin-top:8px;opacity:.44;font-size:.68rem">Membre SNSC · DU Santé Sexuelle Poitiers · École Psycho-Sexologie de Paris</p>
+  <p style="margin-top:4px;opacity:.3;font-size:.64rem">© 2026 Onyn Cossé · @corpsetplaisirs</p>
+</footer>
+
+<!-- ══ ADMIN ══ -->
+<button id="adm-btn" onclick="openAdm()" title="Gérer mes disponibilités">⚙️</button>
+<div class="adm-bg" id="adm-bg">
+  <div class="adm-box">
+    <div class="adm-hd">
+      <h2>⚙️ Gestion des disponibilités</h2>
+      <button class="adm-x" onclick="closeAdm()">×</button>
+    </div>
+    <div class="adm-body">
+      <div class="adm-sec"><h3>Jours de consultation</h3><p class="hint">Activez ou désactivez les jours.</p><div class="dtog" id="dtog"></div></div>
+      <div class="adm-sec"><h3>Créneaux horaires</h3><div class="smgr" id="smgr"></div>
+        <div class="asr"><input type="time" id="new-t"><button class="bsm" onclick="addSlot()">+ Ajouter</button><span class="sm" id="sm1"></span></div>
+      </div>
+      <div class="adm-sec"><h3>Jours fermés</h3>
+        <div class="dor"><input type="date" id="cl-date"><button class="bsm" onclick="addClosed()">Bloquer</button></div>
+        <div id="cl-list" style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px"></div>
+      </div>
+      <div class="adm-sec"><h3>Créneaux réservés</h3><div id="adm-booked" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div></div>
+      <div class="adm-sec"><h3>Demandes reçues</h3><div class="rdv-lst" id="adm-rdv"><p class="hint">Aucune demande.</p></div></div>
+      <button class="bsm" style="width:100%;padding:12px" onclick="saveAdm()">💾 Sauvegarder</button>
+      <span class="sm" id="sm2" style="display:block;text-align:center;margin-top:8px"></span>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
