@@ -509,30 +509,7 @@ document.getElementById("confirm").style.display="block";
 </body>
 </html>
 
-
-<!-- ══ Formulaire de contact ══ -->
-
-    <section class="Contact" id="Contact">
-    <div class="container">
-      <div class="section-header">
-  function sendContact(){
-  const email=document.getElementById('cf-email').value;
-  const msg=document.getElementById('cf-msg').value;
-  if(!email.includes('@')||!msg.trim()){
-    alert('Merci de renseigner votre e-mail et votre message.');return;
-  }
-  document.getElementById('contact-ok').classList.add('show');
-  ['cf-prenom','cf-nom','cf-email','cf-sujet','cf-msg'].forEach(id=>{
-    document.getElementById(id).value='';
-  });
-  document.getElementById('cf-pj').value='';
-  setTimeout(()=>document.getElementById('contact-ok').classList.remove('show'),5000);
-}
-</script>
-</body>
-</html>&
-
-
+  
 
   <!-- ══ FOOTER ══ -->
   <footer class="footer">
