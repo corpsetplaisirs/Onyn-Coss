@@ -515,10 +515,10 @@ img { max-width: 100%; display: block; }
   box-shadow: var(--shadow);
 }
 .service-card.featured {
-  background: var(--blanc);
+  background: var(--marron-fonce);
   border-color: var(--marron-fonce);
 }
-.service-card.featured h3 { color: var(--marron-fonce); }
+.service-card.featured h3 { color: var(--blanc); }
 .service-card.featured p { color: rgba(250,248,244,.72); }
 .service-icon {
   font-size: 1.8rem;
