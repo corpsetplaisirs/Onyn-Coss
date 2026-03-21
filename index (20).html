@@ -315,6 +315,95 @@
             <p>Merci, je vous répondrai dans les meilleurs délais.</p>
           </div>
         </div>
+<div class="confirm" id="confirm">
+<h3>✅ Demande envoyée</h3>
+<p>Ajoutez votre rendez-vous à votre calendrier :</p>
+<a id="calendarLink" target="_blank">📅 Ajouter à Google Calendar</a>
+</div>
+
+</div>
+
+<script>
+const dateInput=document.getElementById("date");
+const slotsContainer=document.getElementById("slots");
+const heureInput=document.getElementById("heure");
+const priceBox=document.getElementById("priceBox");
+
+const today=new Date().toISOString().split("T")[0];
+dateInput.min=today;
+
+const takenSlots={"2026-03-22":["10:00","14:00"]};
+
+function updatePrice(){
+const type=document.getElementById("type").value;
+const prices={individuel:"55€ - 50 min",couple:"90€ - 75 min",etudiant:"45€ - visio"};
+priceBox.innerHTML=prices[type]||"Sélectionnez une séance";
+}
+
+function generateSlots(){
+const date=new Date(dateInput.value);
+const day=date.getDay();
+slotsContainer.innerHTML="";
+
+if(day===0){slotsContainer.innerHTML="Fermé le dimanche";return}
+
+for(let h=9;h<19;h++){
+let hour=`${h.toString().padStart(2,'0')}:00`;
+let div=document.createElement("div");
+div.className="slot";
+div.textContent=hour;
+
+if(takenSlots[dateInput.value]?.includes(hour)){
+div.classList.add("disabled");
+}
+
+div.onclick=()=>{
+document.querySelectorAll(".slot").forEach(s=>s.classList.remove("selected"));
+div.classList.add("selected");
+heureInput.value=hour;
+}
+
+slotsContainer.appendChild(div);
+}
+}
+
+dateInput.addEventListener("change",generateSlots);
+
+function createGoogleCalendarLink(){
+const date=dateInput.value;
+const heure=heureInput.value;
+const prenom=document.getElementById("prenom").value;
+
+const start=new Date(`${date}T${heure}`);
+const end=new Date(start.getTime()+60*60000);
+
+function format(d){return d.toISOString().replace(/-|:|\.\d+/g,"");}
+
+const url=`https://www.google.com/calendar/render?action=TEMPLATE&text=RDV+Sexologue+-+${prenom}&dates=${format(start)}/${format(end)}&details=Consultation&location=Cabinet`;
+
+return url;
+}
+
+function submitForm(e){
+e.preventDefault();
+
+if(!heureInput.value){alert("Choisissez un créneau");return}
+
+const link=createGoogleCalendarLink();
+document.getElementById("calendarLink").href=link;
+
+// Simuler envoi email ici
+console.log("RDV enregistré");
+
+// UI
+document.querySelector(".form").style.display="none";
+document.getElementById("confirm").style.display="block";
+}
+</script>
+
+</body>
+</html>
+
 
       </div>
     </div>
