@@ -227,17 +227,19 @@
       <div class="paiement-box">
         <div class="paiement-icon">&#128176;</div>
         <div class="paiement-text">
-          <h4>Les paiements acceptés</h4>
-           <h3>Les paiements par virement bancaire</h3>
-          <p>Pour les consultations en visio, le règlement s'effectue par virement bancaire avant chaque séance. Les coordonnées bancaires sont communiquées après confirmation du rendez-vous.</p>
+          <h4>Les paiements pour les consultations en visioconférence</h4>
+          <p>Le règlement s'effectue par virement bancaire avant chaque séance. Les coordonnées bancaires sont communiquées après confirmation du rendez-vous.</p>
           <div class="rib-info">
             <span class="rib-label">RIB</span>
             <div class="rib-details">
               <p><strong>Titulaire :</strong> COSSÉ Onyn</p>
               <p><strong>IBAN :</strong> FR76 XXXX XXXX XXXX XXXX XXXX XXX</p>
               <p><strong>BIC :</strong> XXXXXXXX</p>
-          <p>Pour les consultations en présentiel, le règlement peut s'effectuer par virement bancaire avant chaque séance, en espèce ou en carte bancaire</p>          
                 </div>
+          </div>
+          <h4>Les paiements pour les consultations en cabinet</h4>
+          <p>Le règlement peut s'effectuer par virement bancaire avant chaque séance, en espèce ou en carte bancaire le jour de la consultation.</p>          
+               </div>
           </div>
           <h4>Politique de paiement & d'annulation</h4>
           <p class="paiement-note">&#128274;&nbsp;&nbsp;Vos informations ne sont jamais partagées ni stockées par ce site.</p>
@@ -506,6 +508,25 @@ document.getElementById("confirm").style.display="block";
 </body>
 </html>
 
+
+<!-- ══ Formulaire de contact ══ -->
+
+  function sendContact(){
+  const email=document.getElementById('cf-email').value;
+  const msg=document.getElementById('cf-msg').value;
+  if(!email.includes('@')||!msg.trim()){
+    alert('Merci de renseigner votre e-mail et votre message.');return;
+  }
+  document.getElementById('contact-ok').classList.add('show');
+  ['cf-prenom','cf-nom','cf-email','cf-sujet','cf-msg'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('cf-pj').value='';
+  setTimeout(()=>document.getElementById('contact-ok').classList.remove('show'),5000);
+}
+</script>
+</body>
+</html>&
 
 
 
