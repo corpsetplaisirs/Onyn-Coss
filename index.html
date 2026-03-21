@@ -235,8 +235,6 @@
               <p><strong>Titulaire :</strong> COSSÉ Onyn</p>
               <p><strong>IBAN :</strong> FR76 XXXX XXXX XXXX XXXX XXXX XXX</p>
               <p><strong>BIC :</strong> XXXXXXXX</p>
-            </div>
-          </div>
       <div class="paiement-box">
         <div class="paiement-icon">&#128176;</div>
         <div class="paiement-text">
@@ -363,8 +361,7 @@ button{width:100%;padding:15px;background:#c8a96e;color:white;border:none;border
 <input id="nom" required>
 </div>
 
-
-
+  
 <div class="form-group">
 <label>Téléphone</label>
 <input id="tel" type="tel">
@@ -385,6 +382,16 @@ button{width:100%;padding:15px;background:#c8a96e;color:white;border:none;border
 </select>
 </div>
 
+<div class="form-group">
+<label>Moyen de paiement</label>
+<select id="type" onchange="updatePrice()" required>
+<option value="">Choisir</option>
+<option value=">Par virement bancaire</option>
+<option value="couple">Par espèce</option>
+<option value="etudiant">Par carte bancaire</option>
+</select>
+</div>
+  
 <div id="priceBox">Sélectionnez une séance</div>
 
 <div class="form-group">
