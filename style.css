@@ -514,7 +514,7 @@ img { max-width: 100%; display: block; }
   transform: translateY(-4px);
   box-shadow: var(--shadow);
 }
-.service-card.featured {
+<div class="service-card">
   background: var(--blanc);
   border-color: transparent;
 }
