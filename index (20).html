@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onyn Cossé — Psycho-Sexologue</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%235c3d2e'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='22' font-weight='600' fill='%23d4c4a8' letter-spacing='-1'>O.C</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a class="nav-logo" href="#accueil">Onyn Cossé</a>
+    <ul class="nav-links">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#cadre">Le cadre</a></li>
+      <li><a href="#services">Accompagnements</a></li>
+      <li><a href="#tarifs">Tarifs</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#rdv" class="nav-cta">Prendre rendez-vous</a></li>
+    </ul>
+    <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="toggleMenu()">À propos</a>
+    <a href="#cadre" onclick="toggleMenu()">Le cadre</a>
+    <a href="#services" onclick="toggleMenu()">Accompagnements</a>
+    <a href="#tarifs" onclick="toggleMenu()">Tarifs</a>
+    <a href="#faq" onclick="toggleMenu()">FAQ</a>
+    <a href="#rdv" onclick="toggleMenu()">Prendre rendez-vous</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-img-bg" style="background-image: url('cabinet2.jpeg');"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Psycho-Sexologue certifiée</span>
+      <h1 class="hero-title">Un espace pour<br /><em>vous retrouver</em></h1>
+      <p class="hero-sub">Accompagnement individuel, de couple et thérapeutique autour de la sexualité, de l'intimité et du bien-être émotionnel.</p>
+      <div class="hero-actions">
+        <a href="#rdv" class="btn-primary">Prendre rendez-vous</a>
+        <a href="#about" class="btn-secondary">En savoir plus</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-image-wrap">
+        <img src="PP.png" alt="Cabinet Onyn Cossé" />
+        <div class="about-badge">
+          <span class="badge-num">Votre</span>
+          <span class="badge-txt">thérapeute</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="section-label">À propos</span>
+        <h2>Onyn Cossé,<br /><em>à votre écoute</em></h2>
+        <p>Je suis sexologue clinicien, actuellement en formation au sein de l'école de Psycho-sexologie de Paris, ainsi qu'au Diplôme Universitaire Conseiller en Santé sexuelle à Poitiers. Mon cabinet est un espace bienveillant, confidentiel et sans jugement.</p>
+        <p>Mon approche s'articule autour de l'écoute active et d'outils thérapeutiques adaptés à chaque situation. Que vous traversiez des difficultés relationnelles, des questionnements sur votre identité ou des troubles de la sexualité, je vous accompagne à votre rythme.</p>
+        <ul class="about-certifs">
+          <li>&#10003;&nbsp;&nbsp;D.U. Conseiller en Santé Sexuelle - Poitiers</li>
+          <li>&#10003;&nbsp;&nbsp;École Psycho-Sexologie - Paris</li>
+          <li>&#10003;&nbsp;&nbsp;Formation initiation Hypnose - École psycho-sexologie à Paris</li>
+          <li>&#10003;&nbsp;&nbsp;Membre du SNSC</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LE CADRE -->
+  <section class="cadre" id="cadre">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label center">Le cadre thérapeutique</span>
+        <h2 class="section-title center">Un espace <em>sécurisé</em></h2>
+        <div class="section-div"></div>
+      </div>
+      <div class="cadre-grid">
+        <div class="cadre-card"><div class="cadre-icon">🤫</div><h3>Confidentialité totale</h3><p>Tout ce qui est partagé en séance reste strictement confidentiel. Le secret professionnel est un pilier fondamental de ma pratique.</p></div>
+        <div class="cadre-card"><div class="cadre-icon">🌿</div><h3>Sans jugement</h3><p>Mon cabinet est un espace libre de tout jugement. Quelle que soit votre situation, vous serez accueilli·e avec bienveillance et respect.</p></div>
+        <div class="cadre-card"><div class="cadre-icon">🎯</div><h3>Approche sur mesure</h3><p>Chaque parcours est unique. J'adapte mes outils thérapeutiques à votre rythme, vos besoins et vos objectifs personnels.</p></div>
+        <div class="cadre-card"><div class="cadre-icon">💻</div><h3>Présentiel &amp; Visio</h3><p>Les séances peuvent se dérouler en cabinet au Mans ou par visioconférence, selon votre convenance et vos contraintes.</p></div>
+        <div class="cadre-card"><div class="cadre-icon">📋</div><h3>Cadre éthique</h3><p>Ma pratique respecte le code de déontologie des psychologues et sexologues cliniciens. Votre sécurité est ma priorité.</p></div>
+        <div class="cadre-card"><div class="cadre-icon">🔄</div><h3>Suivi régulier</h3><p>Un accompagnement continu, avec des bilans intermédiaires pour ajuster le cap et mesurer les progrès ensemble.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label center">Accompagnements</span>
+        <h2 class="section-title center">Ce que je <em>propose</em></h2>
+        <div class="section-div"></div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card"><div class="service-icon">&#9788;</div><h3>Suivi individuel</h3><p>Un espace pour explorer vos émotions, votre rapport à l'intime et à vous-même, à travers un accompagnement sur mesure.</p></div>
+        <div class="service-card featured"><div class="service-icon">&#10047;</div><h3>Prise en charge de couple</h3><p>Retrouver la communication, reconstruire l'intimité, traverser les crises — accompagnement des deux partenaires.</p></div>
+        <div class="service-card"><div class="service-icon">&#10024;</div><h3>Sexologie clinique</h3><p>Troubles du désir, douleurs, difficultés érectiles, dyspareunies… Prise en charge globale, bienveillante et professionnelle.</p></div>
+        <div class="service-card"><div class="service-icon">&#9670;</div><h3>Identité &amp; orientation</h3><p>Questionnements sur le genre, l'orientation sexuelle, la transition — un espace sûr pour explorer et s'affirmer.</p></div>
+        <div class="service-card"><div class="service-icon">&#9728;</div><h3>Consultation en ligne</h3><p>Des séances par visioconférence accessibles depuis chez vous, avec la même qualité d'écoute et d'accompagnement.</p></div>
+        <div class="service-card"><div class="service-icon">&#9825;</div><h3>Situations stressantes</h3><p>Accompagnement d'individus ayant des situations stressantes ou complexes impactant leur sexualité, leur intimité.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section class="tarifs" id="tarifs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label center">Tarifs</span>
+        <h2 class="section-title center">Transparence <em>&amp; accessibilité</em></h2>
+        <div class="section-div"></div>
+      </div>
+      <div class="tarifs-grid">
+        <div class="tarif-card">
+          <h3>Consultation individuelle</h3>
+          <div class="tarif-price">55 <span>€</span></div>
+          <div class="tarif-duree">50 minutes</div>
+          <p>Un espace personnel pour explorer vos questionnements autour de la sexualité et de l'intime.</p>
+          <ul><li>Présentiel &amp; Visio</li><li>Écoute bienveillante</li><li>Mise en place d'outils</li></ul>
+          <a href="#rdv" class="btn-primary">Réserver</a>
+        </div>
+        <div class="tarif-card featured">
+          <h3>Thérapie de couple</h3>
+          <div class="tarif-price">90 <span>€</span></div>
+          <div class="tarif-duree">75 minutes</div>
+          <p>Accompagnement pour reconstruire le lien, améliorer la communication et retrouver l'intimité.</p>
+          <ul><li>À deux</li><li>Des questionnements sur notre couple</li><li>Trouver des outils pour raviver la flamme</li></ul>
+          <a href="#rdv" class="btn-primary">Réserver</a>
+        </div>
+        <div class="tarif-card">
+          <h3>Consultation Étudiant·e</h3>
+          <div class="tarif-price">45 <span>€</span></div>
+          <div class="tarif-duree">50 minutes</div>
+          <p>Tarif adapté pour les étudiant·es, sur présentation d'un justificatif de scolarité.</p>
+          <ul><li>De l'éducation à la sexualité</li><li>Des outils pour bien se préparer</li><li>Travailler la confiance en soi</li></ul>
+          <a href="#rdv" class="btn-primary">Réserver</a>
+        </div>
+      </div>
+      <div class="paiement-box">
+        <div class="paiement-icon">&#128176;</div>
+        <div class="paiement-text">
+          <h4>Paiements — consultations en visioconférence</h4>
+          <p>Le règlement s'effectue par virement bancaire avant chaque séance. Les coordonnées bancaires sont communiquées après confirmation du rendez-vous.</p>
+          <div class="rib-info">
+            <span class="rib-label">RIB</span>
+            <div class="rib-details">
+              <p><strong>Titulaire :</strong> COSSÉ Onyn</p>
+              <p><strong>IBAN :</strong> FR76 XXXX XXXX XXXX XXXX XXXX XXX</p>
+              <p><strong>BIC :</strong> XXXXXXXX</p>
+            </div>
+          </div>
+          <h4>Paiements — consultations en cabinet</h4>
+          <p>Le règlement peut s'effectuer par virement bancaire, en espèces ou par carte bancaire le jour de la consultation.</p>
+          <h4>Politique d'annulation</h4>
+          <p class="paiement-note">&#128274;&nbsp;&nbsp;Vos informations ne sont jamais partagées ni stockées par ce site.</p>
+          <div class="paiement-politique">
+            <p>✅ <strong>Paiement</strong> — Règlement 72h avant la séance, délais bancaires inclus.</p>
+            <p>⏰ <strong>Annulation &gt; 48h avant</strong> — Annulation libre, sans frais.</p>
+            <p>⚠️ <strong>Annulation entre 48h et 0h</strong> — 50 % du montant conservé.</p>
+            <p>🚫 <strong>Absence ou annulation le jour J</strong> — Intégralité du montant conservée.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label center">Questions fréquentes</span>
+        <h2 class="section-title center">Vous avez <em>des questions ?</em></h2>
+        <div class="section-div"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Quelle est la différence entre un sexologue et un psycho-sexologue ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Un psycho-sexologue allie la formation en psychologie clinique à la sexologie. Cela permet une approche globale qui prend en compte à la fois les dimensions psychologiques, relationnelles et sexuelles de la personne.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Est-ce que les séances sont remboursées par la sécurité sociale ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Les séances ne sont pas remboursées par la sécurité sociale. Cependant, certaines mutuelles prennent en charge une partie des consultations. Renseignez-vous auprès de votre organisme complémentaire.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Comment se déroule la première séance ?<span class="faq-icon">+</span></button><div class="faq-a"><p>La première séance est un espace d'échange libre. Nous faisons connaissance, vous exposez vos préoccupations à votre rythme, et nous définissons ensemble les contours de votre accompagnement.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Puis-je consulter seul·e même si ma problématique concerne le couple ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Absolument. Il est tout à fait possible de consulter individuellement pour des problématiques relationnelles ou de couple. Nous travaillons alors sur votre propre vécu, vos attentes et votre positionnement au sein de la relation.</p></div></div>
+        <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Les consultations en ligne sont-elles aussi efficaces qu'en présentiel ?<span class="faq-icon">+</span></button><div class="faq-a"><p>Oui. Les études montrent une efficacité comparable pour les thérapies en ligne. Elles offrent en plus une grande flexibilité et permettent de consulter depuis chez soi dans un environnement familier et rassurant.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RENDEZ-VOUS -->
+  <section class="rdv" id="rdv">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label center">Rendez-vous</span>
+        <h2 class="section-title center">Réservez <em>votre séance</em></h2>
+        <div class="section-div"></div>
+      </div>
+      <p class="rdv-intro">Choisissez le type de consultation, une date et un créneau disponible. Je confirmerai votre demande par retour de message.</p>
+      <form class="rdv-form" id="rdvForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group"><label for="prenom">Prénom</label><input type="text" id="prenom" placeholder="Votre prénom" required /></div>
+          <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" placeholder="Votre nom" required /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="votre@email.fr" required /></div>
+          <div class="form-group"><label for="tel">Téléphone</label><input type="tel" id="tel" placeholder="+33 6 …" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="type">Type de séance</label>
+            <select id="type" onchange="updatePrice()" required>
+              <option value="">Choisir</option>
+              <option value="individuel">Individuel — 55 €</option>
+              <option value="couple">Couple — 90 €</option>
+              <option value="etudiant">Étudiant·e — 45 €</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="paiement">Moyen de paiement</label>
+            <select id="paiement">
+              <option value="">Choisir</option>
+              <option value="virement">Par virement bancaire</option>
+              <option value="especes">Par espèces</option>
+              <option value="carte">Par carte bancaire</option>
+            </select>
+          </div>
+        </div>
+        <div id="priceBox" class="price-box">Sélectionnez une séance</div>
+        <div class="form-row">
+          <div class="form-group"><label for="date">Date souhaitée</label><input type="date" id="date" required /></div>
+          <div class="form-group"><label>Créneau</label><div class="slots" id="slots"><span class="slots-placeholder">Choisissez d'abord une date</span></div></div>
+        </div>
+        <input type="hidden" id="heure" />
+        <div class="form-group full"><label for="message">Message (optionnel)</label><textarea id="message" rows="4" placeholder="Décrivez votre demande, vos attentes ou toute information utile…"></textarea></div>
+        <div class="form-group full"><label for="file">Pièce jointe (optionnel)</label><input type="file" id="file" /></div>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" required />J'ai pris connaissance de la politique de paiement et d'annulation et j'en accepte les conditions.</label>
+        </div>
+        <button type="submit" class="btn-primary btn-large" style="width:100%;text-align:center;margin-top:8px;">Valider la demande de rendez-vous</button>
+      </form>
+      <div class="rdv-confirm hidden" id="rdvConfirm">
+        <div class="confirm-icon">✓</div>
+        <h3>Demande envoyée</h3>
+        <p>Votre demande a bien été reçue. Je vous contacterai sous 24h pour confirmer le créneau.</p>
+        <a id="calendarLink" href="#" target="_blank" class="btn-secondary" style="margin-top:24px;display:inline-block;">📅 Ajouter à Google Calendar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER avec formulaire de contact intégré ══ -->
+  <footer class="footer" id="contact">
+
+    <!-- Bande contact -->
+    <div class="footer-contact-band">
+      <div class="container footer-contact-inner">
+
+        <div class="footer-contact-info">
+          <span class="footer-contact-label">Contact</span>
+          <h3 class="footer-contact-title">Envoyez-moi <em>un message</em></h3>
+          <p class="footer-contact-intro">Une question, une hésitation, ou simplement l'envie d'en savoir plus avant de prendre rendez-vous ? Je vous réponds sous 24–48 h.</p>
+          <div class="footer-info-list">
+            <div class="footer-info-item"><span class="footer-info-icon">📍</span><span>Le Mans, 72100</span></div>
+            <div class="footer-info-item"><span class="footer-info-icon">📞</span><span>+33 7 69 00 87 29</span></div>
+            <div class="footer-info-item"><span class="footer-info-icon">✉️</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b4844455f4a485f6b44455245584e534447444c5e4e054d59">[email&#160;protected]</a></span></div>
+            <div class="footer-info-item"><span class="footer-info-icon">🕐</span><span>Lun – Sam, 9h – 19h</span></div>
+          </div>
+        </div>
+
+        <div class="footer-form-wrap">
+          <form class="footer-contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+            <div class="footer-form-row">
+              <div class="footer-form-group">
+                <label for="contact-prenom">Prénom</label>
+                <input type="text" id="contact-prenom" placeholder="Votre prénom" required />
+              </div>
+              <div class="footer-form-group">
+                <label for="contact-nom">Nom</label>
+                <input type="text" id="contact-nom" placeholder="Votre nom" required />
+              </div>
+            </div>
+            <div class="footer-form-group">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" placeholder="votre@email.fr" required />
+            </div>
+            <div class="footer-form-group">
+              <label for="contact-sujet">Sujet</label>
+              <select id="contact-sujet">
+                <option value="">Choisir un sujet (optionnel)</option>
+                <option value="information">Demande d'information</option>
+                <option value="tarifs">Question sur les tarifs</option>
+                <option value="modalites">Modalités des séances</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="footer-form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" rows="5" placeholder="Écrivez votre message ici…" required></textarea>
+            </div>
+            <div class="footer-form-check">
+              <label class="footer-check-label">
+                <input type="checkbox" required />
+                J'accepte que mes données soient utilisées pour répondre à ma demande.
+              </label>
+            </div>
+            <button type="submit" class="footer-form-btn">Envoyer le message</button>
+          </form>
+
+          <div class="footer-contact-confirm hidden" id="contactConfirm">
+            <div class="footer-confirm-icon">✉️</div>
+            <p class="footer-confirm-title">Message envoyé !</p>
+            <p>Merci, je vous répondrai dans les meilleurs délais.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bas du footer -->
+    <div class="footer-main">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">Onyn Cossé</div>
+          <p>Psycho-Sexologue<br />Cabinet &amp; consultations en ligne</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <a href="#about">À propos</a>
+          <a href="#cadre">Le cadre</a>
+          <a href="#services">Accompagnements</a>
+          <a href="#tarifs">Tarifs</a>
+          <a href="#faq">FAQ</a>
+          <a href="#rdv">Rendez-vous</a>
+        </div>
+        <div class="footer-nav-contact">
+          <h4>Coordonnées</h4>
+          <p>&#128205;&nbsp;&nbsp;Le Mans, 72100</p>
+          <p>&#128222;&nbsp;&nbsp;+33 7 69 00 87 29</p>
+          <p>&#128140;&nbsp;&nbsp;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f0fcfde7f2f0e7d3fcfdeafde0f6ebfcfffcf4e6f6bdf5e1">[email&#160;protected]</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Onyn Cossé — Psycho-Sexologue. Tous droits réservés.</p>
+        <p>Confidentialité &middot; Mentions légales</p>
+      </div>
+    </div>
+
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    });
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('mobileMenu').classList.remove('open');
+      });
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id'); });
+      navLinks.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+      });
+    });
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+      document.querySelectorAll('.faq-q.open').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
+      if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+    }
+
+    const MAIL = 'corpsetplaisirs@gmail.com';
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const prenom  = document.getElementById('contact-prenom').value;
+      const nom     = document.getElementById('contact-nom').value;
+      const email   = document.getElementById('contact-email').value;
+      const sujet   = document.getElementById('contact-sujet').value || 'Message via site';
+      const msg     = document.getElementById('contact-message').value;
+
+      // Affichage de la confirmation en premier
+      document.getElementById('contactForm').classList.add('hidden');
+      document.getElementById('contactConfirm').classList.remove('hidden');
+
+      // Ouverture du client mail après un court délai
+      const subject = encodeURIComponent(`[Contact] ${sujet} — ${prenom} ${nom}`);
+      const body    = encodeURIComponent(`Prénom : ${prenom}\nNom : ${nom}\nEmail : ${email}\nSujet : ${sujet}\n\nMessage :\n${msg}`);
+      setTimeout(() => { window.location.href = `mailto:${MAIL}?subject=${subject}&body=${body}`; }, 400);
+    }
+
+    function updatePrice() {
+      const type = document.getElementById('type').value;
+      const prices = { individuel: '55 € — 50 min', couple: '90 € — 75 min', etudiant: '45 € — 50 min (visio)' };
+      const box = document.getElementById('priceBox');
+      box.textContent = prices[type] || 'Sélectionnez une séance';
+      box.classList.toggle('active', !!prices[type]);
+    }
+
+    const dateInput = document.getElementById('date');
+    const slotsContainer = document.getElementById('slots');
+    const heureInput = document.getElementById('heure');
+    dateInput.min = new Date().toISOString().split('T')[0];
+    const takenSlots = { '2026-03-22': ['10:00', '14:00'] };
+
+    function generateSlots() {
+      const day = new Date(dateInput.value).getDay();
+      slotsContainer.innerHTML = '';
+      if (day === 0) { slotsContainer.innerHTML = '<span class="slots-placeholder">Fermé le dimanche</span>'; return; }
+      for (let h = 9; h < 19; h++) {
+        const hour = `${h.toString().padStart(2, '0')}:00`;
+        const div = document.createElement('div');
+        div.className = 'slot';
+        div.textContent = hour;
+        if (takenSlots[dateInput.value]?.includes(hour)) div.classList.add('disabled');
+        div.onclick = () => {
+          document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+          div.classList.add('selected');
+          heureInput.value = hour;
+        };
+        slotsContainer.appendChild(div);
+      }
+    }
+    dateInput.addEventListener('change', generateSlots);
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      if (!heureInput.value) { alert('Veuillez choisir un créneau.'); return; }
+      const prenom   = document.getElementById('prenom').value;
+      const nom      = document.getElementById('nom').value;
+      const email    = document.getElementById('email').value;
+      const tel      = document.getElementById('tel').value;
+      const type     = document.getElementById('type').value;
+      const paiement = document.getElementById('paiement').value;
+      const msg      = document.getElementById('message').value;
+
+      // Google Calendar — construit et appliqué EN PREMIER
+      const start = new Date(`${dateInput.value}T${heureInput.value}`);
+      const end   = new Date(start.getTime() + 60 * 60000);
+      const fmt   = d => d.toISOString().replace(/-|:|\.\d+/g, '');
+      const calUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=RDV+Sexologue+-+${encodeURIComponent(prenom)}&dates=${fmt(start)}/${fmt(end)}&details=Consultation+Onyn+Coss%C3%A9&location=Le+Mans`;
+      document.getElementById('calendarLink').href = calUrl;
+
+      // Affichage de la confirmation
+      document.getElementById('rdvForm').classList.add('hidden');
+      document.getElementById('rdvConfirm').classList.remove('hidden');
+
+      // Envoi email — ouvert après un court délai pour ne pas interrompre l'affichage
+      const subject = encodeURIComponent(`[RDV] ${type} — ${prenom} ${nom} — ${dateInput.value} à ${heureInput.value}`);
+      const body = encodeURIComponent(
+        `Nouvelle demande de rendez-vous\n\n` +
+        `Prénom : ${prenom}\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel || 'non renseigné'}\n\n` +
+        `Type de séance : ${type}\nMoyen de paiement : ${paiement}\n` +
+        `Date souhaitée : ${dateInput.value}\nCréneau : ${heureInput.value}\n\n` +
+        `Message : ${msg || 'aucun'}`
+      );
+      setTimeout(() => { window.location.href = `mailto:${MAIL}?subject=${subject}&body=${body}`; }, 400);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.cadre-card, .service-card, .tarif-card, .faq-item').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
