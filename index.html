@@ -277,20 +277,20 @@
             <div class="footer-form-row">
               <div class="footer-form-group">
                 <label for="contact-prenom">Prénom</label>
-                <input type="text" id="contact-prenom" name="contact-prenom" placeholder="Votre prénom" required />
+                <input type="text" id="contact-prenom" placeholder="Votre prénom" required />
               </div>
               <div class="footer-form-group">
                 <label for="contact-nom">Nom</label>
-                <input type="text" id="contact-nom" name="contact-nom" placeholder="Votre nom" required />
+                <input type="text" id="contact-nom" placeholder="Votre nom" required />
               </div>
             </div>
             <div class="footer-form-group">
               <label for="contact-email">Email</label>
-              <input type="email" id="contact-email" name="contact-email" placeholder="votre@email.fr" required />
+              <input type="email" id="contact-email" placeholder="votre@email.fr" required />
             </div>
             <div class="footer-form-group">
               <label for="contact-sujet">Sujet</label>
-              <select id="contact-sujet" name="contact-sujet">
+              <select id="contact-sujet">
                 <option value="">Choisir un sujet (optionnel)</option>
                 <option value="information">Demande d'information</option>
                 <option value="tarifs">Question sur les tarifs</option>
@@ -300,7 +300,7 @@
             </div>
             <div class="footer-form-group">
               <label for="contact-message">Message</label>
-              <textarea id="contact-message" name="contact-message" rows="5" placeholder="Écrivez votre message ici…" required></textarea>
+              <textarea id="contact-message" rows="5" placeholder="Écrivez votre message ici…" required></textarea>
             </div>
             <div class="footer-form-check">
               <label class="footer-check-label">
@@ -415,21 +415,7 @@
       document.getElementById('contactForm').classList.add('hidden');
       document.getElementById('contactConfirm').classList.remove('hidden');
 
-      // Envoi email via lien invisible
-
-    <script type="text/javascript"
-          src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-    </script>
-    <script type="text/javascript">
-     (function(){
-        emailjs.init({
-          publicKey: "AMDjrdLXXKtikq_wa",
-        });
-     })();
-    </script>
-
-
-      
+      // Envoi email via lien invisible   
       const subject = encodeURIComponent(`[Contact] ${sujet} — ${prenom} ${nom}`);
       const body    = encodeURIComponent(`Prénom : ${prenom}\nNom : ${nom}\nEmail : ${email}\nSujet : ${sujet}\n\nMessage :\n${msg}`);
       const a = document.createElement('a');
