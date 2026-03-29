@@ -464,6 +464,17 @@
       return url;
     }
 
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "AMDjrdLXXKtikq_wa",
+      });
+   })();
+</script>
+    
     function submitForm(e) {
       e.preventDefault();
       if (!heureInput.value) { alert('Choisissez un créneau'); return; }
