@@ -203,11 +203,11 @@
       <p class="rdv-intro">Choisissez le type de consultation, une date et un créneau disponible. Je confirmerai votre demande par retour de message.</p>
       <form class="rdv-form form" id="rdvForm" onsubmit="submitForm(event)">
         <div class="form-row">
-          <div class="form-group"><label for="prenom">Prénom</label><input type="text" id="prenom" placeholder="Votre prénom" required /></div>
-          <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" placeholder="Votre nom" required /></div>
+          <div class="form-group"><label for="prenom">Prénom</label><input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required /></div>
+          <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" name="nom" placeholder="Votre nom" required /></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="votre@email.fr" required /></div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="votre@email.fr" required /></div>
           <div class="form-group"><label for="tel">Téléphone</label><input type="tel" id="tel" placeholder="+33 6 …" /></div>
         </div>
         <div class="form-row">
@@ -488,7 +488,7 @@
       document.querySelector('.form').style.display = 'none';
       document.getElementById('confirm').style.display = 'block';
 
-      emailjs.sendForm('service_svk56wu', '', '#rdvForm').then(
+      emailjs.sendForm('service_svk56wu', 'template_9m15fpa', '#rdvForm').then(
         (response) => {
         console.log('SUCCESS!', response.status, response.text);
         },
