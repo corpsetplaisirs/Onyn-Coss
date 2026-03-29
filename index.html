@@ -352,6 +352,17 @@
 
   </footer>
 
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "AMDjrdLXXKtikq_wa",
+      });
+   })();
+  </script>
+  
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -463,17 +474,6 @@
       const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=RDV+Sexologue+-+${prenom}&dates=${format(start)}/${format(end)}&details=Consultation&location=Cabinet`;
       return url;
     }
-
-  <script type="text/javascript">
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-  </script>
-  <script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "AMDjrdLXXKtikq_wa",
-      });
-   })();
-  </script>
     
     function submitForm(e) {
       e.preventDefault();
