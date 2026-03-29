@@ -416,6 +416,20 @@
       document.getElementById('contactConfirm').classList.remove('hidden');
 
       // Envoi email via lien invisible
+
+  <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "AMDjrdLXXKtikq_wa",
+      });
+   })();
+  </script>
+
+
+      
       const subject = encodeURIComponent(`[Contact] ${sujet} — ${prenom} ${nom}`);
       const body    = encodeURIComponent(`Prénom : ${prenom}\nNom : ${nom}\nEmail : ${email}\nSujet : ${sujet}\n\nMessage :\n${msg}`);
       const a = document.createElement('a');
