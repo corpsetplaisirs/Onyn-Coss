@@ -491,7 +491,7 @@
       document.querySelector('.form').style.display = 'none';
       document.getElementById('confirm').style.display = 'block';
 
-      emailjs.sendForm('service_svk56wu', 'template_9m15fpa', '#rdvForm').then(
+      emailjs.sendForm('service_svk56wu', 'template_9m15fpa', '#contactForm').then(
         (response) => {
         console.log('SUCCESS!', response.status, response.text);
         },
