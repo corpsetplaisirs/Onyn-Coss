@@ -403,21 +403,13 @@
 
     const MAIL = 'corpsetplaisirs@gmail.com';
 
-   function handleContactSubmit(e) {
-  e.preventDefault();
-
-  emailjs.sendForm('service_svk56wu', 'template_CONTACT_ID', '#contactForm')
-    .then(
-      () => {
-        document.getElementById('contactForm').classList.add('hidden');
-        document.getElementById('contactConfirm').classList.remove('hidden');
-      },
-      (error) => {
-        console.log('FAILED...', error);
-        alert('Une erreur est survenue. Veuillez réessayer.');
-      }
-    );
-}
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const prenom  = document.getElementById('contact-prenom').value;
+      const nom     = document.getElementById('contact-nom').value;
+      const email   = document.getElementById('contact-email').value;
+      const sujet   = document.getElementById('contact-sujet').value || 'Message via site';
+      const msg     = document.getElementById('contact-message').value;
 
       // Affichage confirmation
       document.getElementById('contactForm').classList.add('hidden');
