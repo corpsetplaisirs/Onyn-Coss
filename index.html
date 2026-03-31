@@ -351,16 +351,6 @@
     </div>
 
   </footer>
-
-  emailjs.sendForm('service_svk56wu', 'template_jzq91ri', '#contactForm').then(
-        (response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        },
-        (error) => {
-        console.log('FAILED...', error);
-        },
-      );
-    }
   
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const navbar = document.getElementById('navbar');
@@ -404,12 +394,19 @@
 
     function handleContactSubmit(e) {
       e.preventDefault();
-      const prenom  = document.getElementById('contact-prenom').value;
-      const nom     = document.getElementById('contact-nom').value;
-      const email   = document.getElementById('contact-email').value;
-      const sujet   = document.getElementById('contact-sujet').value || 'Message via site';
-      const msg     = document.getElementById('contact-message').value;
-
+    emailjs.sendForm('service_svk56wu', 'template_jzq91ri', '#contactForm')
+    .then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        document.getElementById('contactForm').classList.add('hidden');
+        document.getElementById('contactConfirm').classList.remove('hidden');
+      },
+      (error) => {
+        console.log('FAILED...', error);
+        alert('Une erreur est survenue. Veuillez réessayer.');
+      }
+    );
+}
       // Affichage confirmation
       document.getElementById('contactForm').classList.add('hidden');
       document.getElementById('contactConfirm').classList.remove('hidden');
