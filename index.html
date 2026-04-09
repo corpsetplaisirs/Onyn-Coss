@@ -20,7 +20,7 @@
       <li><a href="#services">Accompagnements</a></li>
       <li><a href="#tarifs">Tarifs</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#tarifs" class="nav-cta">Prendre rendez-vous</a></li>
+      <li><a href="#rdv" class="nav-cta">Prendre rendez-vous</a></li>
     </ul>
     <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
   </nav>
@@ -38,11 +38,11 @@
   <section class="hero" id="accueil">
     <div class="hero-img-bg" style="background-image: url('cabinet2.jpeg');"></div>
     <div class="hero-content">
-      <span class="hero-eyebrow">Psycho-Sexologue</span>
+      <span class="hero-eyebrow">Sexologue sur Le Mans</span>
       <h1 class="hero-title">Un espace pour<br /><em>vous retrouver</em></h1>
       <p class="hero-sub">Accompagnement individuel, en couple et thérapeutie autour de la sexualité, de l'intimité et du bien-être émotionnel.</p>
       <div class="hero-actions">
-        <a href="#rdv" class="btn-primary">Prendre rendez-vous</a>
+        <a href="#tarifs" class="btn-primary">Prendre rendez-vous</a>
         <a href="#about" class="btn-secondary">En savoir plus</a>
       </div>
     </div>
@@ -124,7 +124,7 @@
           <div class="tarif-duree">50 minutes</div>
           <p>Un espace personnel pour explorer vos questionnements autour de la sexualité et de l'intime.</p>
           <ul><li>Présentiel &amp; Visio</li><li>Écoute bienveillante</li><li>Mise en place d'outils</li></ul>
-          <a href="#rdv" class="btn-primary">Réserver</a>
+          <a href="https://calendly.com/cosse-sexologie/30min" target="blank" class="btn-primary">Réserver</a>
         </div>
         <div class="tarif-card featured">
           <h3>Consultation de couple</h3>
@@ -132,7 +132,7 @@
           <div class="tarif-duree">80 minutes</div>
           <p>Accompagnement pour reconstruire le lien, améliorer la communication et retrouver l'intimité.</p>
           <ul><li>À deux</li><li>Des questionnements sur notre couple</li><li>Trouver des outils pour raviver la flamme</li></ul>
-          <a href="#rdv" class="btn-primary">Réserver</a>
+          <a href="https://calendly.com/cosse-sexologie/consultation-couple" target="blank" class="btn-primary">Réserver</a>
         </div>
         <div class="tarif-card">
           <h3>Consultation Étudiante</h3>
@@ -140,7 +140,7 @@
           <div class="tarif-duree">50 minutes</div>
           <p>Tarif adapté pour les étudiant·es, sur présentation d'un justificatif de scolarité.</p>
           <ul><li>De l'éducation à la sexualité</li><li>Des outils pour bien se préparer</li><li>Travailler la confiance en soi</li></ul>
-          <a href="#rdv" class="btn-primary">Réserver</a>
+          <a href="https://calendly.com/cosse-sexologie/consultation-individuelle-etudiante" target="blank" class="btn-primary">Réserver</a>
         </div>
       </div>
       <div class="paiement-box">
@@ -191,66 +191,6 @@
     </div>
   </section>
 
-  <!-- RENDEZ-VOUS -->
-  <section class="rdv" id="rdv">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label center">Rendez-vous</span>
-        <h2 class="section-title center">Réservez <em>votre séance</em></h2>
-        <div class="section-div"></div>
-      </div>
-      <p class="rdv-intro">Choisissez le type de consultation, une date et un créneau disponible. Je confirmerai votre demande par retour de message.</p>
-      <form class="rdv-form form" id="rdvForm" onsubmit="submitForm(event)">
-        <div class="form-row">
-          <div class="form-group"><label for="prenom">Prénom</label><input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required /></div>
-          <div class="form-group"><label for="nom">Nom</label><input type="text" id="nom" name="nom" placeholder="Votre nom" required /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="votre@email.fr" required /></div>
-          <div class="form-group"><label for="tel">Téléphone</label><input type="tel" id="tel" name="tel" placeholder="+33 6 …" /></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="type">Type de séance</label>
-            <select id="type" name="type" onchange="updatePrice()" required>
-              <option value="">Choisir</option>
-              <option value="individuel">Individuel — 55 €</option>
-              <option value="couple">Couple — 90 €</option>
-              <option value="etudiant">Étudiant·e — 45 €</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="paiement">Moyen de paiement</label>
-            <select id="paiement" name="paiement">
-              <option value="">Choisir</option>
-              <option value="virement">Par virement bancaire</option>
-              <option value="especes">Par espèces</option>
-              <option value="carte">Par carte bancaire</option>
-            </select>
-          </div>
-        </div>
-        <div id="priceBox" class="price-box">Sélectionnez une séance</div>
-        <div class="form-row">
-          <div class="form-group"><label for="date">Date souhaitée</label><input type="date" id="date" name="date" required /></div>
-          <div class="form-group"><label>Créneau</label><div class="slots" id="slots"><span class="slots-placeholder">Choisissez d'abord une date</span></div></div>
-        </div>
-        <input type="hidden" id="heure" name="heure" />
-        <div class="form-group full"><label for="rdv-message">Message</label><textarea id="rdv-message" name="rdv-message" rows="4" placeholder="Décrivez votre demande, vos attentes, vos traitements ou toute information utile…"></textarea></div>
-        <div class="checkbox-group">
-          <label class="checkbox-label"><input type="checkbox" required />J'ai pris connaissance de la politique de paiement et d'annulation et j'en accepte les conditions.</label>
-        </div>
-        <button type="submit" class="btn-primary btn-large" style="width:100%;text-align:center;margin-top:8px;">Valider la demande de rendez-vous</button>
-      </form>
-
-      <div class="rdv-confirm" id="confirm" style="display:none;">
-        <div class="confirm-icon">✅</div>
-        <h3>Demande envoyée</h3>
-        <p>Ajoutez votre rendez-vous à votre calendrier :</p>
-        <a id="calendarLink" target="_blank" class="btn-secondary" style="margin-top:24px;display:inline-block;" onclick="return !!this.href">📅 Ajouter à Google Calendar</a>
-      </div>
-    </div>
-  </section>
-
   <!-- ══ FOOTER avec formulaire de contact intégré ══ -->
   <footer class="footer" id="contact">
 
@@ -264,7 +204,7 @@
           <p class="footer-contact-intro">Une question, une hésitation, ou simplement l'envie d'en savoir plus avant de prendre rendez-vous ? Je vous réponds sous 24h–48 h.</p>
           <div class="footer-info-list">
             <div class="footer-info-item"><span class="footer-info-icon">📍</span><span>Le Mans, 72100</span></div>
-            <div class="footer-info-item"><span class="footer-info-icon">📞</span><span>+33 7 69 00 87 29</span></div>
+            <div class="footer-info-item"><span class="footer-info-icon">📞</span><span>+33 7 69 87 71 54</span></div>
             <div class="footer-info-item"><span class="footer-info-icon">✉️</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b4844455f4a485f6b44455245584e534447444c5e4e054d59">corpsetplaisirs@gmail.com</a></span></div>
             <div class="footer-info-item"><span class="footer-info-icon">🕐</span><span>Lun – Sam, 9h – 18h</span></div>
           </div>
@@ -333,13 +273,18 @@
           <a href="#services">Accompagnements</a>
           <a href="#tarifs">Tarifs</a>
           <a href="#faq">FAQ</a>
-          <a href="#rdv">Rendez-vous</a>
+          <a href="#tarifs">Rendez-vous</a>
         </div>
         <div class="footer-nav-contact">
           <h4>Coordonnées</h4>
           <p>&#128205;&nbsp;&nbsp;Le Mans, 72100</p>
-          <p>&#128222;&nbsp;&nbsp;+33 7 69 00 87 29</p>
-          <p>&#128140;&nbsp;&nbsp;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93f0fcfde7f2f0e7d3fcfdeafde0f6ebfcfffcf4e6f6bdf5e1">corpsetplaisirs@gmail.com</a></p>
+          <p>&#128222;&nbsp;&nbsp;+33 7 69 </p>
+          <p>&#128140;&nbsp;&nbsp;corpsetplaisirs@gmail.com</a></p>
+	<a href="https://www.resalib.fr/praticien/126834-onyn-cosse-sexologue-le-mans" 
+	   target="_blank" 
+   	style="color: inherit; text-decoration: none;">
+	   Resalib
+
         </div>
       </div>
       <div class="footer-bottom">
@@ -418,18 +363,11 @@
     }
     function updatePrice() {
       const type = document.getElementById('type').value;
-      const prices = { individuel: '55€ - 50 min', couple: '90€ - 75 min', etudiant: '45€ - visio' };
+      const prices = { individuel: '55€ - 50 min', couple: '90€ - 75 min', etudiant: '45€ - 50 min' };
       const box = document.getElementById('priceBox');
       box.innerHTML = prices[type] || 'Sélectionnez une séance';
       box.classList.toggle('active', !!prices[type]);
     }
-
-    const dateInput = document.getElementById('date');
-    const slotsContainer = document.getElementById('slots');
-    const heureInput = document.getElementById('heure');
-    const priceBox = document.getElementById('priceBox');
-    dateInput.min = new Date().toISOString().split('T')[0];
-    const takenSlots = { '2026-04-02': ['10:00', '14:00'] };
 
     function generateSlots() {
       const date = new Date(dateInput.value);
@@ -452,7 +390,6 @@
         slotsContainer.appendChild(div);
       }
     }
-    dateInput.addEventListener('change', generateSlots);
 
     function createGoogleCalendarLink() {
       const date = dateInput.value;
